@@ -7,19 +7,24 @@
             <div>
                 <form>
                     <div class="mb-6">
-                        <label for="title"
+                        <label for="name"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
                             Todo </label>
-                        <input type="text" id="title" placeholder="Todo.."
+                        <input wire:model="name" type="text" id="name" placeholder="Todo.."
                             class="bg-gray-100  text-gray-900 text-sm rounded block w-full p-2.5">
 
-                        <span class="text-red-500 text-xs mt-3 block ">Error</span>
+                        @error('name')
+                            <span class="text-red-500 text-xs mt-3 block ">{{ $message }}</span>
+                        @enderror
 
                     </div>
-                    <button type="submit"
-                        class="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600">Create
-                        +</button>
-                    <span class="text-green-500 text-xs">Saved.</span>
+                    <button wire:click.prevent="create" type="submit" class="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600">
+                        Create +
+                    </button>
+
+                    @if(session('success'))
+                        <span class="text-green-500 text-xs">{{ session('success') }}</span>
+                    @endif
 
                 </form>
             </div>

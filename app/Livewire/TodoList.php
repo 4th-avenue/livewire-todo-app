@@ -16,6 +16,9 @@ class TodoList extends Component
 
     public $search;
 
+    public $editingTodoId;
+    public $editingTodoName;
+
     public function create()
     {
         $validated = $this->validateOnly('name');
@@ -36,6 +39,12 @@ class TodoList extends Component
     {
         $todo->completed = !$todo->completed;
         $todo->save();
+    }
+
+    public function edit(Todo $todo)
+    {
+        $this->editingTodoId = $todo->id;
+        $this->editingTodoName = $todo->name;
     }
 
     public function render()

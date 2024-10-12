@@ -7,19 +7,20 @@
             @else
                 <input wire:click="toggle({{ $todo->id }})" type="checkbox">
             @endif
-            <!-- <input type="text" placeholder="Todo.."
-                        class="bg-gray-100  text-gray-900 text-sm rounded block w-full p-2.5"
-                        value="Todo Name">
-                    
-                        <span class="text-red-500 text-xs block">error</span> -->
-    
-            <h3 class="text-lg text-semibold text-gray-800">{{ $todo->name }}</h3>
+
+            @if ($editingTodoId === $todo->id)
+                <input wire:model="editingTodoName" type="text" placeholder="Todo.." class="bg-gray-100  text-gray-900 text-sm rounded block w-full p-2.5">
+
+                @error('editingTodoName')
+                    <span class="text-red-500 text-xs block">{{ $message }}</span>
+                @enderror
+            @else
+                <h3 class="text-lg text-semibold text-gray-800">{{ $todo->name }}</h3>
+            @endif
         </div>
 
-
-
         <div class="flex items-center space-x-2">
-            <button class="text-sm text-teal-500 font-semibold rounded hover:text-teal-800">
+            <button wire:click="edit({{ $todo->id }})" class="text-sm text-teal-500 font-semibold rounded hover:text-teal-800">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-4 h-4">
                     <path stroke-linecap="round" stroke-linejoin="round"

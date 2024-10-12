@@ -32,6 +32,12 @@ class TodoList extends Component
         $todo->delete();
     }
 
+    public function toggle(Todo $todo)
+    {
+        $todo->completed = !$todo->completed;
+        $todo->save();
+    }
+
     public function render()
     {
         return view('livewire.todo-list', [
